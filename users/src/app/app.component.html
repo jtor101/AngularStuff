@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <h1>{{ title }}</h1>
+
+  <div class="container-fluid">
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        placeholder="Enter your first name"
+        required
+        autofocus
+        [(ngModel)]="firstName"
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        placeholder="Enter your last name"
+        required
+        autofocus
+        [(ngModel)]="lastName"
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        placeholder="Enter your email address"
+        required
+        autofocus
+        [(ngModel)]="email"
+      />
+    </div>
+    <button type="button" class="btn btn-primary" (click)="AddUser()">
+      Add User
+    </button>
+    <button type="button" class="btn btn-info" (click)="onReset()">
+      Clear
+    </button>
+  </div>
+
+  <!-- Built-in structural (changes structure of DOM) *ngIf Directive: conditional expression returns true/false -->
+  <div class="container" id="usersDiv">
+    <hr />
+    <!-- Built-in ngStyle attribute directive: uses Property Binding [ ] to bind to a property of the directive -->
+    <h3 [ngStyle]="{ color: getColor() }">Users</h3>
+    <div *ngIf="newUserAdded; else noUsers">
+      <!--
+        String Interpolation: Whatever is evaluated in the TypeScript expression inside the String Interpolation braces {{ }} resolves to a String.
+        {{ TypeScript_Expression }} => result is a String
+      -->
+      <table class="table table-hover table-dark table-striped">
+        <thead>
+          <th>User Info</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>
+              {{ user }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Create ng-template with local reference (#) to conditinally display -->
+    <ng-template #noUsers>No Users Added.</ng-template>
+  </div>
+  <div class="container">
+    <hr />
+    <!-- Even though currentYear is defiuned as type number in app.component.ts, it resolves to a string -->
+    <!--<footer class="pull-right">&copy; {{currentYear}}</footer>-->
+    <!-- Make call to method to get year -->
+    <footer class="pull-right">&copy; {{ getCurrentYear() }}</footer>
+  </div>
+</div>
