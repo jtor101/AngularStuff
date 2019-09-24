@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { freshUser } from "./users.model";
+import { UsersvService } from "./../providers/usersv.service";
 
 @Component({
   selector: "app-users",
@@ -9,28 +9,31 @@ import { freshUser } from "./users.model";
 export class UsersComponent implements OnInit {
   // Array to hold Mountain Objects
 
-  users: freshUser[] = [];
-
   firstName: string = "";
   lastName: string = "";
   email: string = "";
   currentYear: number = 2019;
   newuserAdded: boolean = false;
 
-  // executed when Add Mountain is clicked
-  Adduser(): void {
-    this.users.push(new freshUser(this.firstName, this.lastName, this.email));
+  users: any[] = [];
+  constructor(private usersvservice: UsersvService) {}
 
-    this.newuserAdded = true;
-  }
-
-  // executed when the Reset button is clicked
   onReset(): void {
     this.firstName = "";
     this.lastName = "";
     this.email = "";
 
     this.newuserAdded = false;
+  }
+
+  // executed when Add Mountain is clicked
+  Adduserinfo(): void {
+    this.users = this.usersvservice.Adduser(
+      this.firstName,
+      this.lastName,
+      this.email
+    );
+    this.newuserAdded = true;
   }
 
   getCurrentYear(): number {
@@ -40,7 +43,8 @@ export class UsersComponent implements OnInit {
   getColor(): string {
     return this.newuserAdded === true ? "#000080" : "#FF0000"; // navy : red
   }
-  constructor() {}
+
+  // executed when the Reset button is clicked
 
   ngOnInit() {}
 }
