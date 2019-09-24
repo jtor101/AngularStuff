@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h1>{{ title }}</h1>
+  <app-header></app-header>
 
   <div class="container-fluid">
     <div class="form-group">
@@ -76,6 +76,7 @@
     <!-- Even though currentYear is defiuned as type number in app.component.ts, it resolves to a string -->
     <!--<footer class="pull-right">&copy; {{currentYear}}</footer>-->
     <!-- Make call to method to get year -->
-    <footer class="pull-right">&copy; {{ getCurrentYear() }}</footer>
   </div>
+  
+  <app-footer></app-footer>
 </div>
