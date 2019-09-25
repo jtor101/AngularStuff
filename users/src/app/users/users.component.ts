@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { UsersvService } from "./../providers/usersv.service";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-users",
@@ -8,15 +9,20 @@ import { UsersvService } from "./../providers/usersv.service";
 })
 export class UsersComponent implements OnInit {
   // Array to hold Mountain Objects
-
+  sub: any;
+  userName: string = "";
   firstName: string = "";
   lastName: string = "";
   email: string = "";
   currentYear: number = 2019;
-  newuserAdded: boolean = false;
+  newuserAdded: boolean = true;
 
   users: any[] = [];
-  constructor(private usersvservice: UsersvService) {}
+  constructor(
+    private usersvservice: UsersvService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   onReset(): void {
     this.firstName = "";
@@ -46,5 +52,15 @@ export class UsersComponent implements OnInit {
 
   // executed when the Reset button is clicked
 
-  ngOnInit() {}
+  ngOnInit() {
+    // get username from Query Params
+    // Subscribe to Observable
+    // pass anonymoue callback function to subscribe method
+    this.sub = this.route.queryParams.subscribe(params => {
+      this.userName = params["username"];
+    });
+  }
+  onLogout() {
+    this.router.navigate(["/"]);
+  }
 }

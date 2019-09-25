@@ -1,7 +1,8 @@
-<div class="container-fluid">
-  <app-header></app-header>
+<div class="container">
+  <h1>{{ title }}</h1>
 
-  <app-users></app-users>
+  <!-- this is where the "pages" will be displayed -->
+  <router-outlet></router-outlet>
 
   <app-footer></app-footer>
 </div>

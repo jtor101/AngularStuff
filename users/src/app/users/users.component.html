@@ -65,4 +65,15 @@
   </div>
   <!-- Create ng-template with local reference (#) to conditinally display -->
   <ng-template #noUsers>No Users Added.</ng-template>
+  <div class="container">
+    <hr />
+    <h3>
+      User: {{ userName }}
+      <span class="pull-right"
+        ><button type="button" class="btn btn-primary" (click)="onLogout()">
+          Logout
+        </button></span
+      >
+    </h3>
+  </div>
 </div>
